@@ -1,0 +1,57 @@
+﻿@model List<PG2024.Models.TablesNewModels.UserTableNewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Usuarios</h2>
+<div class="row">
+    <div class="col-lg-12">
+        <input type="button" class="btn btn-primary" onclick="document.location.href = '@Url.Content("~/User/Add")'" value="NUEVO USUARIO" />
+
+    </div>
+
+</div>
+<br>
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table table-bordered">
+            <tr>
+                <th>NOMBRE</th>
+                <th>TIPO USUARIO</th>
+                <th>TIENDA </th>
+                <th>ACCIONES </th>
+            </tr>
+            @foreach (var usuario in Model)
+            {
+                <tr>
+                    <td>@usuario.Nombre</td>
+                    <td>@usuario.TipoUsuario</td>
+                    <td>@usuario.NombreTienda</td>
+                    <td>
+                        <div class="d-inline">
+                            <form action="@Url.Action("Delete", "User")" method="post" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este usuario?');">
+                                <input type="hidden" name="UsuarioID" value="@usuario.UsuarioID" />
+                                <input type="submit" value="Eliminar" class="btn btn-danger" />
+                                <input onclick="document.location.href = '@Url.Action("Edit", "User", new { UsuarioID = usuario.UsuarioID })'" type="button" value="Editar" class="btn btn-default" />
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+<script>
+    function jsDeleteConfirmation(usuarioID) {
+    if (confirm("¿Estás seguro de que deseas eliminar este usuario?")) {
+        var url = '@Url.Action("Delete", "User")' + '?UsuarioID=' + usuarioID;
+        // Aquí puedes realizar tu llamada AJAX para eliminar el usuario
+        // Ejemplo:
+        // $.post(url, function(data) {
+        //    // Manejar la respuesta de eliminación si es necesario
+        // });
+    }
+}
+</script>

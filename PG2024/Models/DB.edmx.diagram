@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c0e9cf076512466f8d7bedfc02be5034" Name="Diagram1" ZoomLevel="92">
+        <EntityTypeShape EntityType="BoutiqueMEModel.Auditoria" Width="1.5" PointX="5.25" PointY="0.75" />
+        <EntityTypeShape EntityType="BoutiqueMEModel.Categoria" Width="1.5" PointX="1.5" PointY="15.125" />
+        <EntityTypeShape EntityType="BoutiqueMEModel.Despacho" Width="1.5" PointX="3" PointY="10.875" />
+        <EntityTypeShape EntityType="BoutiqueMEModel.DespachoProducto" Width="1.5" PointX="5.25" PointY="10.875" />
+        <EntityTypeShape EntityType="BoutiqueMEModel.Factura" Width="1.5" PointX="5.25" PointY="7.75" />
+        <EntityTypeShape EntityType="BoutiqueMEModel.Inventario" Width="1.5" PointX="6" PointY="4.875" />
+        <EntityTypeShape EntityType="BoutiqueMEModel.Producto" Width="1.5" PointX="3.75" PointY="14.5" />
+        <EntityTypeShape EntityType="BoutiqueMEModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="1.75" />
+        <EntityTypeShape EntityType="BoutiqueMEModel.Tienda" Width="1.5" PointX="0.75" PointY="8.5" />
+        <EntityTypeShape EntityType="BoutiqueMEModel.TipoUsuario" Width="1.5" PointX="0.75" PointY="6.125" />
+        <EntityTypeShape EntityType="BoutiqueMEModel.Traslado" Width="1.5" PointX="3" PointY="19.625" />
+        <EntityTypeShape EntityType="BoutiqueMEModel.TrasladoProducto" Width="1.5" PointX="5.25" PointY="19.875" />
+        <EntityTypeShape EntityType="BoutiqueMEModel.Usuario" Width="1.5" PointX="3" PointY="6.5" />
+        <AssociationConnector Association="BoutiqueMEModel.FK__Auditoria__Usuar__31B762FC" />
+        <AssociationConnector Association="BoutiqueMEModel.FK__Producto__Catego__1CBC4616" />
+        <AssociationConnector Association="BoutiqueMEModel.FK__Despacho__Tienda__1F98B2C1" />
+        <AssociationConnector Association="BoutiqueMEModel.FK__DespachoP__Despa__22751F6C" />
+        <AssociationConnector Association="BoutiqueMEModel.FK__DespachoP__Produ__236943A5" />
+        <AssociationConnector Association="BoutiqueMEModel.FK__Factura__TiendaI__3493CFA7" />
+        <AssociationConnector Association="BoutiqueMEModel.FK__Factura__Usuario__3587F3E0" />
+        <AssociationConnector Association="BoutiqueMEModel.FK__Inventari__Produ__2DE6D218" />
+        <AssociationConnector Association="BoutiqueMEModel.FK__Inventari__Tiend__2EDAF651" />
+        <AssociationConnector Association="BoutiqueMEModel.FK__TrasladoP__Produ__2B0A656D" />
+        <AssociationConnector Association="BoutiqueMEModel.FK__Traslado__Destin__2739D489" />
+        <AssociationConnector Association="BoutiqueMEModel.FK__Traslado__Origen__2645B050" />
+        <AssociationConnector Association="BoutiqueMEModel.FK__Usuario__TiendaI__17F790F9" />
+        <AssociationConnector Association="BoutiqueMEModel.FK__Usuario__TipoUsu__17036CC0" />
+        <AssociationConnector Association="BoutiqueMEModel.FK__TrasladoP__Trasl__2A164134" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

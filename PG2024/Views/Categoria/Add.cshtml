@@ -1,0 +1,32 @@
+﻿
+@model PG2024.Models.ViewModels.CategoriaViewModel
+@{
+    ViewBag.Title = "Categoria";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="row">
+    <div class="col-lg-12">
+        @using (Html.BeginForm("Add", "Categoria", FormMethod.Post, new { role = "form", @class = "" }))
+        {
+
+          
+            @Html.ValidationMessage("error", new { @class = "text-danger" })
+            @Html.LabelFor(d => d.Nombre)
+            @Html.TextBoxFor(d => d.Nombre, new { @class = "form-control" })
+            @Html.ValidationMessage("Nombre de la Categoria", new { @class = "text-danger" }) <br />
+
+            
+
+            <div style="text-align: right">
+                <input type="submit" class="btn btn-success" value="Crear" />
+
+            </div>
+
+        }
+
+    </div>
+
+</div>
+

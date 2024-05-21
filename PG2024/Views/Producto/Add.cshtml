@@ -1,0 +1,48 @@
+﻿@model PG2024.Models.ViewModels.ProductoViewModel
+@{
+    ViewBag.Title = "Agregar Producto";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="row">
+    <div class="col-lg-12">
+        @using (Html.BeginForm("Add", "Producto", FormMethod.Post, new { role = "form", @class = "" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationMessage("error", new { @class = "text-danger" })
+
+            <!-- Codigo de Barras -->
+            <div class="form-group">
+                @Html.LabelFor(d => d.CodigoBarra)
+                @Html.TextBoxFor(d => d.CodigoBarra, new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.CodigoBarra, "", new { @class = "text-danger" })
+            </div>
+
+            <!-- Nombre del Producto -->
+            <div class="form-group">
+                @Html.LabelFor(d => d.Nombre)
+                @Html.TextBoxFor(d => d.Nombre, new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Nombre, "", new { @class = "text-danger" })
+            </div>
+
+            <!-- Precio -->
+            <div class="form-group">
+                @Html.LabelFor(d => d.Precio)
+                @Html.TextBoxFor(d => d.Precio, new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Precio, "", new { @class = "text-danger" })
+            </div>
+
+            <!-- Categoría -->
+            <div class="form-group">
+                @Html.LabelFor(d => d.CategoriaID)
+                @Html.DropDownListFor(d => d.CategoriaID, (IEnumerable<SelectListItem>)ViewBag.Categorias, "Seleccione una categoría", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.CategoriaID, "", new { @class = "text-danger" })
+            </div>
+
+            <div style="text-align: right">
+                <input type="submit" class="btn btn-success" value="Crear" />
+            </div>
+        }
+    </div>
+</div>

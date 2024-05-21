@@ -1,0 +1,375 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BoutiqueMEModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Auditoria">
+    <Key>
+      <PropertyRef Name="AuditoriaID" />
+    </Key>
+    <Property Name="AuditoriaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UsuarioID" Type="int" />
+    <Property Name="Fecha" Type="datetime" />
+    <Property Name="Accion" Type="varchar" MaxLength="100" />
+    <Property Name="TablaAfectada" Type="varchar" MaxLength="100" />
+    <Property Name="Detalles" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="Categoria">
+    <Key>
+      <PropertyRef Name="CategoriaID" />
+    </Key>
+    <Property Name="CategoriaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Despacho">
+    <Key>
+      <PropertyRef Name="DespachoID" />
+    </Key>
+    <Property Name="DespachoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TiendaID" Type="int" />
+    <Property Name="Fecha" Type="datetime" />
+  </EntityType>
+  <EntityType Name="DespachoProducto">
+    <Key>
+      <PropertyRef Name="DespachoID" />
+      <PropertyRef Name="ProductoID" />
+    </Key>
+    <Property Name="DespachoID" Type="int" Nullable="false" />
+    <Property Name="ProductoID" Type="int" Nullable="false" />
+    <Property Name="Cantidad" Type="int" />
+  </EntityType>
+  <EntityType Name="Factura">
+    <Key>
+      <PropertyRef Name="FacturaID" />
+    </Key>
+    <Property Name="FacturaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TiendaID" Type="int" />
+    <Property Name="UsuarioID" Type="int" />
+    <Property Name="Fecha" Type="datetime" />
+    <Property Name="Total" Type="decimal" Precision="10" Scale="2" />
+  </EntityType>
+  <EntityType Name="Inventario">
+    <Key>
+      <PropertyRef Name="InventarioID" />
+    </Key>
+    <Property Name="InventarioID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductoID" Type="int" />
+    <Property Name="TiendaID" Type="int" />
+    <Property Name="Cantidad" Type="int" />
+  </EntityType>
+  <EntityType Name="Producto">
+    <Key>
+      <PropertyRef Name="ProductoID" />
+    </Key>
+    <Property Name="ProductoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CodigoBarra" Type="varchar" MaxLength="50" />
+    <Property Name="Nombre" Type="varchar" MaxLength="100" />
+    <Property Name="Precio" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="CategoriaID" Type="int" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Tienda">
+    <Key>
+      <PropertyRef Name="TiendaID" />
+    </Key>
+    <Property Name="TiendaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="100" />
+    <Property Name="Direccion" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="TipoUsuario">
+    <Key>
+      <PropertyRef Name="TipoUsuarioID" />
+    </Key>
+    <Property Name="TipoUsuarioID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tipo" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Traslado">
+    <Key>
+      <PropertyRef Name="TrasladoID" />
+    </Key>
+    <Property Name="TrasladoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrigenID" Type="int" />
+    <Property Name="DestinoID" Type="int" />
+    <Property Name="Fecha" Type="datetime" />
+  </EntityType>
+  <EntityType Name="TrasladoProducto">
+    <Key>
+      <PropertyRef Name="TrasladoID" />
+      <PropertyRef Name="ProductoID" />
+    </Key>
+    <Property Name="TrasladoID" Type="int" Nullable="false" />
+    <Property Name="ProductoID" Type="int" Nullable="false" />
+    <Property Name="Cantidad" Type="int" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="UsuarioID" />
+    </Key>
+    <Property Name="UsuarioID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="100" />
+    <Property Name="Contraseña" Type="varchar" MaxLength="50" />
+    <Property Name="TipoUsuarioID" Type="int" />
+    <Property Name="TiendaID" Type="int" />
+  </EntityType>
+  <Association Name="FK__Auditoria__Usuar__31B762FC">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Auditoria" Type="Self.Auditoria" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="UsuarioID" />
+      </Principal>
+      <Dependent Role="Auditoria">
+        <PropertyRef Name="UsuarioID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Despacho__Tienda__1F98B2C1">
+    <End Role="Tienda" Type="Self.Tienda" Multiplicity="0..1" />
+    <End Role="Despacho" Type="Self.Despacho" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tienda">
+        <PropertyRef Name="TiendaID" />
+      </Principal>
+      <Dependent Role="Despacho">
+        <PropertyRef Name="TiendaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DespachoP__Despa__22751F6C">
+    <End Role="Despacho" Type="Self.Despacho" Multiplicity="1" />
+    <End Role="DespachoProducto" Type="Self.DespachoProducto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Despacho">
+        <PropertyRef Name="DespachoID" />
+      </Principal>
+      <Dependent Role="DespachoProducto">
+        <PropertyRef Name="DespachoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DespachoP__Produ__236943A5">
+    <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+    <End Role="DespachoProducto" Type="Self.DespachoProducto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Producto">
+        <PropertyRef Name="ProductoID" />
+      </Principal>
+      <Dependent Role="DespachoProducto">
+        <PropertyRef Name="ProductoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Factura__TiendaI__3493CFA7">
+    <End Role="Tienda" Type="Self.Tienda" Multiplicity="0..1" />
+    <End Role="Factura" Type="Self.Factura" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tienda">
+        <PropertyRef Name="TiendaID" />
+      </Principal>
+      <Dependent Role="Factura">
+        <PropertyRef Name="TiendaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Factura__Usuario__3587F3E0">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Factura" Type="Self.Factura" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="UsuarioID" />
+      </Principal>
+      <Dependent Role="Factura">
+        <PropertyRef Name="UsuarioID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Inventari__Produ__2DE6D218">
+    <End Role="Producto" Type="Self.Producto" Multiplicity="0..1" />
+    <End Role="Inventario" Type="Self.Inventario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Producto">
+        <PropertyRef Name="ProductoID" />
+      </Principal>
+      <Dependent Role="Inventario">
+        <PropertyRef Name="ProductoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Inventari__Tiend__2EDAF651">
+    <End Role="Tienda" Type="Self.Tienda" Multiplicity="0..1" />
+    <End Role="Inventario" Type="Self.Inventario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tienda">
+        <PropertyRef Name="TiendaID" />
+      </Principal>
+      <Dependent Role="Inventario">
+        <PropertyRef Name="TiendaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Producto__Catego__1CBC4616">
+    <End Role="Categoria" Type="Self.Categoria" Multiplicity="0..1" />
+    <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categoria">
+        <PropertyRef Name="CategoriaID" />
+      </Principal>
+      <Dependent Role="Producto">
+        <PropertyRef Name="CategoriaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Traslado__Destin__2739D489">
+    <End Role="Tienda" Type="Self.Tienda" Multiplicity="0..1" />
+    <End Role="Traslado" Type="Self.Traslado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tienda">
+        <PropertyRef Name="TiendaID" />
+      </Principal>
+      <Dependent Role="Traslado">
+        <PropertyRef Name="DestinoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Traslado__Origen__2645B050">
+    <End Role="Tienda" Type="Self.Tienda" Multiplicity="0..1" />
+    <End Role="Traslado" Type="Self.Traslado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tienda">
+        <PropertyRef Name="TiendaID" />
+      </Principal>
+      <Dependent Role="Traslado">
+        <PropertyRef Name="OrigenID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TrasladoP__Produ__2B0A656D">
+    <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+    <End Role="TrasladoProducto" Type="Self.TrasladoProducto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Producto">
+        <PropertyRef Name="ProductoID" />
+      </Principal>
+      <Dependent Role="TrasladoProducto">
+        <PropertyRef Name="ProductoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TrasladoP__Trasl__2A164134">
+    <End Role="Traslado" Type="Self.Traslado" Multiplicity="1" />
+    <End Role="TrasladoProducto" Type="Self.TrasladoProducto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Traslado">
+        <PropertyRef Name="TrasladoID" />
+      </Principal>
+      <Dependent Role="TrasladoProducto">
+        <PropertyRef Name="TrasladoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Usuario__TiendaI__17F790F9">
+    <End Role="Tienda" Type="Self.Tienda" Multiplicity="0..1" />
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tienda">
+        <PropertyRef Name="TiendaID" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="TiendaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Usuario__TipoUsu__17036CC0">
+    <End Role="TipoUsuario" Type="Self.TipoUsuario" Multiplicity="0..1" />
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoUsuario">
+        <PropertyRef Name="TipoUsuarioID" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="TipoUsuarioID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BoutiqueMEModelStoreContainer">
+    <EntitySet Name="Auditoria" EntityType="Self.Auditoria" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Despacho" EntityType="Self.Despacho" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DespachoProducto" EntityType="Self.DespachoProducto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Factura" EntityType="Self.Factura" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Inventario" EntityType="Self.Inventario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Producto" EntityType="Self.Producto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tienda" EntityType="Self.Tienda" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Traslado" EntityType="Self.Traslado" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TrasladoProducto" EntityType="Self.TrasladoProducto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Auditoria__Usuar__31B762FC" Association="Self.FK__Auditoria__Usuar__31B762FC">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Auditoria" EntitySet="Auditoria" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Despacho__Tienda__1F98B2C1" Association="Self.FK__Despacho__Tienda__1F98B2C1">
+      <End Role="Tienda" EntitySet="Tienda" />
+      <End Role="Despacho" EntitySet="Despacho" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DespachoP__Despa__22751F6C" Association="Self.FK__DespachoP__Despa__22751F6C">
+      <End Role="Despacho" EntitySet="Despacho" />
+      <End Role="DespachoProducto" EntitySet="DespachoProducto" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DespachoP__Produ__236943A5" Association="Self.FK__DespachoP__Produ__236943A5">
+      <End Role="Producto" EntitySet="Producto" />
+      <End Role="DespachoProducto" EntitySet="DespachoProducto" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Factura__TiendaI__3493CFA7" Association="Self.FK__Factura__TiendaI__3493CFA7">
+      <End Role="Tienda" EntitySet="Tienda" />
+      <End Role="Factura" EntitySet="Factura" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Factura__Usuario__3587F3E0" Association="Self.FK__Factura__Usuario__3587F3E0">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Factura" EntitySet="Factura" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Inventari__Produ__2DE6D218" Association="Self.FK__Inventari__Produ__2DE6D218">
+      <End Role="Producto" EntitySet="Producto" />
+      <End Role="Inventario" EntitySet="Inventario" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Inventari__Tiend__2EDAF651" Association="Self.FK__Inventari__Tiend__2EDAF651">
+      <End Role="Tienda" EntitySet="Tienda" />
+      <End Role="Inventario" EntitySet="Inventario" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Producto__Catego__1CBC4616" Association="Self.FK__Producto__Catego__1CBC4616">
+      <End Role="Categoria" EntitySet="Categoria" />
+      <End Role="Producto" EntitySet="Producto" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Traslado__Destin__2739D489" Association="Self.FK__Traslado__Destin__2739D489">
+      <End Role="Tienda" EntitySet="Tienda" />
+      <End Role="Traslado" EntitySet="Traslado" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Traslado__Origen__2645B050" Association="Self.FK__Traslado__Origen__2645B050">
+      <End Role="Tienda" EntitySet="Tienda" />
+      <End Role="Traslado" EntitySet="Traslado" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TrasladoP__Produ__2B0A656D" Association="Self.FK__TrasladoP__Produ__2B0A656D">
+      <End Role="Producto" EntitySet="Producto" />
+      <End Role="TrasladoProducto" EntitySet="TrasladoProducto" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TrasladoP__Trasl__2A164134" Association="Self.FK__TrasladoP__Trasl__2A164134">
+      <End Role="Traslado" EntitySet="Traslado" />
+      <End Role="TrasladoProducto" EntitySet="TrasladoProducto" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Usuario__TiendaI__17F790F9" Association="Self.FK__Usuario__TiendaI__17F790F9">
+      <End Role="Tienda" EntitySet="Tienda" />
+      <End Role="Usuario" EntitySet="Usuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Usuario__TipoUsu__17036CC0" Association="Self.FK__Usuario__TipoUsu__17036CC0">
+      <End Role="TipoUsuario" EntitySet="TipoUsuario" />
+      <End Role="Usuario" EntitySet="Usuario" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

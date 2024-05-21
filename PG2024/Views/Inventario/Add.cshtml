@@ -1,0 +1,41 @@
+﻿
+
+@model PG2024.Models.ViewModels.AddInventarioViewModel
+
+@{
+    ViewBag.Title = "Agregar Inventario";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="row">
+    <div class="col-lg-12">
+        @using (Html.BeginForm("Add", "Inventario", FormMethod.Post, new { role = "form", @class = "" }))
+        {
+            <!-- Producto -->
+            <div class="form-group">
+                @Html.LabelFor(d => d.ProductoID)
+                @Html.DropDownListFor(d => d.ProductoID, Model.Productos, "Seleccione un Producto", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.ProductoID, "", new { @class = "text-danger" })
+            </div>
+
+            <!-- Tienda -->
+            <div class="form-group">
+                @Html.LabelFor(d => d.TiendaID)
+                @Html.DropDownListFor(d => d.TiendaID, Model.Tiendas, "Seleccione una Tienda", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.TiendaID, "", new { @class = "text-danger" })
+            </div>
+
+            <!-- Cantidad -->
+            <div class="form-group">
+                @Html.LabelFor(d => d.Cantidad)
+                @Html.TextBoxFor(d => d.Cantidad, new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Cantidad, "", new { @class = "text-danger" })
+            </div>
+
+            <div style="text-align: right">
+                <input type="submit" class="btn btn-success" value="Crear" />
+            </div>
+        }
+    </div>
+</div>

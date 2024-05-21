@@ -1,0 +1,72 @@
+﻿@model List<PG2024.Models.TablesNewModels.ProductoTablaNewModel>
+
+@{
+    ViewBag.Title = "Producto";
+}
+
+<h2>Productos</h2>
+<div class="row">
+    <div class="col-lg-12">
+        <input type="button" class="btn btn-primary" onclick="document.location.href = '@Url.Content("~/Producto/Add")'" value="NUEVO PRODUCTO" />
+
+    </div>
+
+</div>
+<br>
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table table-bordered">
+            <tr>
+                <th>Código de Barras</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Categoría</th>
+                <th>Acciones</th>
+            </tr>
+            @foreach (var producto in Model)
+            {
+                <tr>
+                    <td>@producto.CodigoBarra</td>
+                    <td>@producto.Nombre</td>
+                    <td>Q. @producto.Precio </td>
+                    <td>@producto.NombreCategoria</td>
+                    <td>
+                        <div class="d-inline">
+                            <form action="@Url.Action("Delete", "Producto")" method="post" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este producto?');">
+                                <input type="hidden" name="ProductoID" value="@producto.ProductoID" />
+                                <input type="submit" value="Eliminar" class="btn btn-danger" />
+                                <input onclick="document.location.href = '@Url.Action("Edit", "Producto", new { ProductoID = producto.ProductoID })'" type="button" value="Editar" class="btn btn-default" />
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </table>
+        <input type="button" class="btn btn-default" onclick="document.location.href = '@Url.Content("~/Inventario")'" value="Volver" />
+    </div>
+</div>
+
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <script>alert("@TempData["ErrorMessage"]");</script>
+}
+
+<script>
+    function jsDeleteConfirmation(ProductoID) {
+        if (confirm("¿Estás seguro de que deseas eliminar este Producto?")) {
+            var url = '@Url.Action("Delete", "Producto")' + '?ProductoID=' + ProductoID;
+            // Realizar llamada AJAX para eliminar la categoría
+            $.post(url, function(data) {
+                if (data.success) {
+                    // Si la eliminación es exitosa, redireccionar a la página Index y mostrar mensaje
+                    window.location.href = '@Url.Action("~/Producto/")';
+                } else {
+                    // Si hay un error, mostrar mensaje de error
+                    alert(data.errorMessage);
+                }
+            });
+        }
+        return false; // Evita que el formulario se envíe automáticamente
+    }
+</script>
