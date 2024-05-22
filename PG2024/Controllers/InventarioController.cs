@@ -74,7 +74,7 @@ namespace PG2024.Controllers
                 return Redirect(Url.Content("~/Inventario/"));
             }
 
-            // Si hay un error de validación, vuelve a llenar las listas desplegables
+           
             model.Productos = GetProductos();
             model.Tiendas = GetTiendas();
 

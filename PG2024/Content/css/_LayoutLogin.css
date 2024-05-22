@@ -1,0 +1,38 @@
+﻿/* Content/css/_LayoutLogin.css */
+body {
+    background-color: #ffdfdf;
+    font-family: Arial, sans-serif;
+    padding-top: 60px; 
+}
+
+.navbar-inverse {
+    background-color: #000000; 
+    border-color: #1a242f;
+}
+
+    .navbar-inverse .navbar-brand {
+        color: #ecf0f1;
+    }
+
+        .navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-brand:focus {
+            color: #dcdcdc;
+        }
+
+    .navbar-inverse .navbar-toggle {
+        border-color: #ecf0f1;
+    }
+
+    .navbar-inverse .icon-bar {
+        background-color: #ecf0f1;
+    }
+
+.footer {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #2c3e50;
+    color: #ecf0f1;
+}
+
+.container.body-content {
+    margin-top: 20px;
+}
