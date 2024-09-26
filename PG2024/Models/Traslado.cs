@@ -24,6 +24,7 @@ namespace PG2024.Models
         public Nullable<int> OrigenID { get; set; }
         public Nullable<int> DestinoID { get; set; }
         public Nullable<System.DateTime> Fecha { get; set; }
+        public string Estado { get; set; }
     
         public virtual Tienda Tienda { get; set; }
         public virtual Tienda Tienda1 { get; set; }

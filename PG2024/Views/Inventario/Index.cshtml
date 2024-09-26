@@ -7,10 +7,10 @@
 <h2>Inventario</h2>
 <div class="row">
     <div class="col-lg-12">
-
-        <input type="button" class="btn btn-primary" onclick="document.location.href = '@Url.Content("~/Producto/Index")'" value="Producto" />
-        <input type="button" class="btn btn-primary" onclick="document.location.href = '@Url.Content("~/Categoria/Index")'" value="Categoria" />
-
+        <div style="margin-bottom: 10px;">
+            <button class="btn btn-primary btn-sm" style="margin-right: 10px;" onclick="document.location.href = '@Url.Content("~/Producto/Index")'">Producto</button>
+            <button class="btn btn-primary btn-sm" style="margin-right: 10px;" onclick="document.location.href = '@Url.Content("~/Categoria/Index")'">Categoria</button>
+        </div>
     </div>
 </div>
 <br>
@@ -18,7 +18,6 @@
     <div class="col-lg-12">
         <table class="table table-bordered">
             <tr>
-
                 <th>Producto</th>
                 <th>Tienda</th>
                 <th>Cantidad</th>
@@ -28,37 +27,38 @@
             @foreach (var item in Model)
             {
                 <tr>
-
                     <td>@item.NombreProducto</td>
                     <td>@item.NombreTienda</td>
                     <td>@item.Cantidad</td>
                     <td>Q. @item.Precio</td>
-
-
                     <td>
-                        <div class="d-inline">
-                            <!-- Agrega aquí tus botones de acción para eliminar y editar -->
-                            <form action="@Url.Action("Delete", "Inventario")" method="post" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este producto?');">
-
+                        <div class="btn-group" role="group">
+                            <form action="@Url.Action("Delete", "Inventario")" method="post" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este producto?');" style="display:inline;">
                                 <input type="hidden" name="InventarioID" value="@item.InventarioID" />
-                                <input type="submit" value="Eliminar" class="btn btn-danger" />
-
-                                <input type="button" class="btn btn-primary" onclick="document.location.href = '@Url.Content("~/Inventario/Add")'" value="Agregar unidades" />
-                                <input onclick="document.location.href = '@Url.Action("Edit", "Inventario", new { InventarioID = item.InventarioID })'" type="button" value="Editar" class="btn btn-default" />
+                                <button type="submit" class="btn btn-danger btn-sm" style="margin-right: 10px;">
+                                    <i class="fas fa-trash"></i>
+                                </button>
                             </form>
 
+                            <button class="btn btn-primary btn-sm" style="margin-right: 10px;"
+                                    onclick="document.location.href = '@Url.Action("AddUnits", "Inventario", new { ProductoID = item.ProductoID, TiendaID = item.TiendaID })'">
+                                <i class="fas fa-plus"></i>
+                            </button>
+
+                            <button class="btn btn-default btn-sm" style="margin-right: 10px;"
+                                    onclick="document.location.href = '@Url.Action("Edit", "Inventario", new { InventarioID = item.InventarioID })'">
+                                <i class="fas fa-edit"></i>
+                            </button>
                         </div>
                     </td>
                 </tr>
             }
-
         </table>
-        <input type="button" class="btn btn-primary" onclick="document.location.href = '@Url.Content("~/Inventario/Add")'" value="Nuevo Registro" />
-
+        <button class="btn btn-primary btn-sm" onclick="document.location.href = '@Url.Content("~/Inventario/Add")'">
+            <i class="fas fa-plus-circle"></i> Nuevo Registro
+        </button>
     </div>
 </div>
-
-
 
 @if (TempData["ErrorMessage"] != null)
 {
@@ -69,17 +69,14 @@
     function jsDeleteConfirmation(InventarioID) {
         if (confirm("¿Estás seguro de que deseas eliminar este Registro del Inventario?")) {
             var url = '@Url.Action("Delete", "Inventario")' + '?InventarioID=' + InventarioID;
-            // Realizar llamada AJAX para eliminar la categoría
             $.post(url, function(data) {
                 if (data.success) {
-                    // Si la eliminación es exitosa, redireccionar a la página Index y mostrar mensaje
                     window.location.href = '@Url.Action("~/Inventario/")';
                 } else {
-                    // Si hay un error, mostrar mensaje de error
                     alert(data.errorMessage);
                 }
             });
         }
-        return false; // Evita que el formulario se envíe automáticamente
+        return false;
     }
 </script>

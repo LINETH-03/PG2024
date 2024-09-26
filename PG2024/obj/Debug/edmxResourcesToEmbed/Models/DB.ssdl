@@ -97,6 +97,7 @@
     <Property Name="OrigenID" Type="int" />
     <Property Name="DestinoID" Type="int" />
     <Property Name="Fecha" Type="datetime" />
+    <Property Name="Estado" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="TrasladoProducto">
     <Key>

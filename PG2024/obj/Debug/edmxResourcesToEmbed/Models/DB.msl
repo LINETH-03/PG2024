@@ -102,6 +102,7 @@
     <EntitySetMapping Name="Traslado">
       <EntityTypeMapping TypeName="BoutiqueMEModel.Traslado">
         <MappingFragment StoreEntitySet="Traslado">
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
           <ScalarProperty Name="Fecha" ColumnName="Fecha" />
           <ScalarProperty Name="DestinoID" ColumnName="DestinoID" />
           <ScalarProperty Name="OrigenID" ColumnName="OrigenID" />

@@ -196,6 +196,7 @@
     <NavigationProperty Name="Tienda" Relationship="BoutiqueMEModel.FK__Traslado__Destin__2739D489" FromRole="Traslado" ToRole="Tienda" />
     <NavigationProperty Name="Tienda1" Relationship="BoutiqueMEModel.FK__Traslado__Origen__2645B050" FromRole="Traslado" ToRole="Tienda" />
     <NavigationProperty Name="TrasladoProducto" Relationship="BoutiqueMEModel.FK__TrasladoP__Trasl__2A164134" FromRole="Traslado" ToRole="TrasladoProducto" />
+    <Property Name="Estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="TrasladoProducto">
     <Key>

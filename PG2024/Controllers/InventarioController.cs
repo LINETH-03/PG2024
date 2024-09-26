@@ -11,8 +11,10 @@ using PG2024.Models.ViewModels;
 
 namespace PG2024.Controllers
 {
+   
     public class InventarioController : Controller
     {
+       
         // GET: Inventario
         public ActionResult Index()
         {
@@ -137,7 +139,55 @@ namespace PG2024.Controllers
         }
 
 
+        [HttpGet]
+        public ActionResult AddUnits(int ProductoID, int TiendaID)
+        {
+            AddInventarioViewModel model = new AddInventarioViewModel
+            {
+                ProductoID = ProductoID,
+                TiendaID = TiendaID,
+                Productos = GetProductos(),
+                Tiendas = GetTiendas(),
+                Cantidad = 0 // Inicialmente vacío para que el usuario ingrese la cantidad
+            };
 
+            return View("AddUnits", model); // Reutilizamos la vista "Add" para aprovechar la estructura del formulario
+        }
+
+        [HttpPost]
+        public ActionResult AddUnits(AddInventarioViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var db = new BoutiqueMEEntities())
+                {
+                  
+                    var inventarioExistente = db.Inventario
+                        .FirstOrDefault(inv => inv.ProductoID == model.ProductoID && inv.TiendaID == model.TiendaID);
+
+                    if (inventarioExistente != null)
+                    {
+                    
+                        inventarioExistente.Cantidad += model.Cantidad;
+
+                        db.Entry(inventarioExistente).State = System.Data.Entity.EntityState.Modified;
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "No se encontró el inventario para este producto y tienda.");
+                    }
+                }
+
+                return Redirect(Url.Content("~/Inventario/"));
+            }
+
+          
+            model.Productos = GetProductos();
+            model.Tiendas = GetTiendas();
+
+            return View("AddUnits", model);
+        }
 
 
 

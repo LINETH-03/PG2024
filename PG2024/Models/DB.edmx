@@ -102,6 +102,7 @@
           <Property Name="OrigenID" Type="int" />
           <Property Name="DestinoID" Type="int" />
           <Property Name="Fecha" Type="datetime" />
+          <Property Name="Estado" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="TrasladoProducto">
           <Key>
@@ -577,6 +578,7 @@
           <NavigationProperty Name="Tienda" Relationship="BoutiqueMEModel.FK__Traslado__Destin__2739D489" FromRole="Traslado" ToRole="Tienda" />
           <NavigationProperty Name="Tienda1" Relationship="BoutiqueMEModel.FK__Traslado__Origen__2645B050" FromRole="Traslado" ToRole="Tienda" />
           <NavigationProperty Name="TrasladoProducto" Relationship="BoutiqueMEModel.FK__TrasladoP__Trasl__2A164134" FromRole="Traslado" ToRole="TrasladoProducto" />
+          <Property Name="Estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="TrasladoProducto">
           <Key>
@@ -890,6 +892,7 @@
           <EntitySetMapping Name="Traslado">
             <EntityTypeMapping TypeName="BoutiqueMEModel.Traslado">
               <MappingFragment StoreEntitySet="Traslado">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="DestinoID" ColumnName="DestinoID" />
                 <ScalarProperty Name="OrigenID" ColumnName="OrigenID" />

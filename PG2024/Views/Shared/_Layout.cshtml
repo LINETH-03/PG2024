@@ -1,12 +1,13 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
+    <title>@ViewBag.Title - Boutique M. E</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <!-- Incluyendo el CDN de Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -21,21 +22,35 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Usuarios", "Index", "User")</li>
-                    <li>@Html.ActionLink("Administración", "Index", "Inventario")</li>
-                   
-
-                    <li>@Html.ActionLink("Cerrar Sesión", "Logoff", "Cerrar")</li>
+                    <li>
+                        <a href="@Url.Action("Index", "User")">
+                            <i class="fas fa-users"></i> Usuarios
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Inventario")">
+                            <i class="fas fa-truck"></i> Despacho
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Inventario")">
+                            <i class="fas fa-cogs"></i> Administración
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Logoff", "Cerrar")">
+                            <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
     </div>
     <div class="container body-content">
-       
         @RenderBody()
         <hr />
         <footer>
-            <p></p>
+            <p>&copy; @DateTime.Now.Year - Boutique M. E</p>
         </footer>
     </div>
 
